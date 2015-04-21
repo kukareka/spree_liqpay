@@ -1,0 +1,6 @@
+<script>
+  $(function() {
+      setInterval(function(){
+      $.getJSON('<%= liqpay_status_order_checkout_url(@order, format: :json) %>', function(data) {
+          if (data.completed) location.reload();})}, 500)});
+</script>
