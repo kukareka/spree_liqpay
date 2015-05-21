@@ -2,7 +2,6 @@ require 'spec_helper.rb'
 
 module Spree
   describe PaymentMethod::Liqpay do
-    let(:name) { 'Liqpay' }
     let(:public_key) { 'public key' }
     let(:private_key) { 'private key' }
     let(:store) { Spree::Store.current }
@@ -12,7 +11,7 @@ module Spree
     end
 
     let :payment_method do
-      PaymentMethod::Liqpay.create! name: name, preferred_public_key: public_key, preferred_private_key: private_key
+      create :liqpay, preferred_public_key: public_key, preferred_private_key: private_key
     end
 
     it 'has server' do
