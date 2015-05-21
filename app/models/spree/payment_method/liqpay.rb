@@ -4,9 +4,14 @@ module Spree
     preference :public_key, :string
     preference :private_key, :string
     preference :order_description, :string, default: -> {Spree::Store.current.name}
+    preference :test_mode, :boolean, default: true
 
     def provider_class
       ActiveMerchant::Billing::Liqpay
+    end
+
+    def provider
+      @provider ||= provider_class.new preferred_public_key, preferred_private_key
     end
 
     def source_required?
@@ -18,7 +23,7 @@ module Spree
     end
 
     def cnb_form_fields(order, result_url, server_url)
-      provider_class.new(preferred_public_key, preferred_private_key).cnb_form_fields amount: order.total,
+      provider.cnb_form_fields amount: order.total,
                                                                   currency: order.currency,
                                                                   description: preferred_order_description,
                                                                   order_id: order.id,
@@ -28,7 +33,7 @@ module Spree
     end
 
     def check_signature(data, signature)
-      provider_class.new(preferred_public_key, preferred_private_key).check_signature(data, signature)
+      provider.check_signature(data, signature)
     end
   end
 end
