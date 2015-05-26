@@ -4,7 +4,6 @@ Spree::Core::Engine.routes.draw do
       member do
         get :liqpay_result
         get :liqpay_status
-        patch :test_liqpay_result
       end
     end
   end

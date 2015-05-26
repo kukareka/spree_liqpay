@@ -2,28 +2,26 @@ require 'spec_helper.rb'
 
 module Spree
   describe PaymentMethod::Liqpay do
-    let(:public_key) { 'public key' }
-    let(:private_key) { 'private key' }
     let(:store) { Spree::Store.current }
 
-    before :all do
-      create :store
+    before do
+      create :store, name: 'Test store'
     end
 
     let :payment_method do
-      create :liqpay, preferred_public_key: public_key, preferred_private_key: private_key
+      create :liqpay
     end
 
     it 'has server' do
-      expect(payment_method.preferred_server).to eq 'https://www.liqpay.com'
+      expect(payment_method.preferred_server).not_to be_nil
     end
 
     it 'has public key' do
-      expect(payment_method.preferred_public_key).to eq public_key
+      expect(payment_method.preferred_public_key).not_to be_nil
     end
 
     it 'has private key' do
-      expect(payment_method.preferred_private_key).to eq private_key
+      expect(payment_method.preferred_private_key).not_to be_nil
     end
 
     it 'has order description' do

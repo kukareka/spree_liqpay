@@ -24,12 +24,12 @@ module Spree
 
     def cnb_form_fields(order, result_url, server_url)
       provider.cnb_form_fields amount: order.total,
-                                                                  currency: order.currency,
-                                                                  description: preferred_order_description,
-                                                                  order_id: order.id,
-                                                                  result_url: result_url,
-                                                                  server_url: server_url,
-                                                                  sandbox: preferred_test_mode ? 1 : 0
+                               currency: order.currency,
+                               description: preferred_order_description,
+                               order_id: order.id,
+                               result_url: result_url,
+                               server_url: server_url,
+                               sandbox: preferred_test_mode ? 1 : 0
     end
 
     def check_signature(data, signature)

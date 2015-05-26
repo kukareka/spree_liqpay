@@ -13,11 +13,15 @@ module ActiveMerchant #:nodoc:
 
       def cnb_form_fields(options)
         params = {version: 3, public_key: @public_key}.merge(options)
-        data = encode64 encode_json params
+        data = encode params
         {
           data: data,
           signature: encode_signature(data)
         }
+      end
+
+      def encode data
+        encode64 encode_json data
       end
 
       def encode64(param)
