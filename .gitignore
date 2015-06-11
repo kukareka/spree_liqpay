@@ -5,6 +5,8 @@ spec/dummy/db
 spec/dummy/log/*.log
 spec/dummy/tmp/
 spec/dummy/.sass-cache
+spec/dummy/public/assets
+spec/dummy/vendor/
 *.iml
 *.idea
 Gemfile.lock
