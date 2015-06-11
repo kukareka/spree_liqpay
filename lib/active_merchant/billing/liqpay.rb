@@ -16,7 +16,7 @@ module ActiveMerchant #:nodoc:
         data = encode params
         {
           data: data,
-          signature: encode_signature data
+          signature: encode_signature(data)
         }
       end
 
