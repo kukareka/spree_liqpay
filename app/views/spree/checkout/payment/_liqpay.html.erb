@@ -3,9 +3,11 @@
       var checkout_form = $('#checkout_form_payment');
       var checkout_form_action = checkout_form.prop('action');
       var radio = $('#order_payments_attributes__payment_method_id_<%= payment_method.id %>')
-      $('input[type=radio][name="order[payments_attributes][][payment_method_id]"]', checkout_form).change(function() {
+      var change_submit_url = function() {
           checkout_form.prop('action', radio.prop('checked') ? '<%= payment_method.checkout_url %>' : checkout_form_action);
-      });
+      };
+      $('input[type=radio][name="order[payments_attributes][][payment_method_id]"]', checkout_form).change(change_submit_url);
+      change_submit_url();
   })
 </script>
 <% payment_method.cnb_form_fields(@order, liqpay_result_order_checkout_url(@order),

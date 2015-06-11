@@ -1,6 +1,7 @@
+require 'spree_core'
+
 module SpreeLiqpay
   class Engine < ::Rails::Engine
-    require 'spree/core'
     isolate_namespace Spree
     engine_name 'spree_liqpay'
 
@@ -8,7 +9,10 @@ module SpreeLiqpay
 
     # use rspec for tests
     config.generators do |g|
-      g.test_framework :rspec
+      g.test_framework :rspec, fixture: false
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.assets false
+      g.helper false
     end
 
     def self.activate
@@ -19,8 +23,8 @@ module SpreeLiqpay
 
     config.to_prepare &method(:activate).to_proc
 
-    initializer "spree.paypal_express.payment_methods", after: "spree.register.payment_methods" do |app|
-      app.config.spree.payment_methods << ::Spree::BillingIntegration::Liqpay
+    initializer 'spree.liqpay.payment_methods', after: 'spree.register.payment_methods' do |app|
+      app.config.spree.payment_methods << ::Spree::PaymentMethod::Liqpay
     end
 
   end

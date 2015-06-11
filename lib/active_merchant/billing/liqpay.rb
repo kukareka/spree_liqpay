@@ -6,33 +6,37 @@ module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
     class Liqpay < Gateway
 
-      def initialize(public_key, private_key)
+      def initialize public_key, private_key
         @public_key = public_key
         @private_key = private_key
       end
 
-      def cnb_form_fields(options)
-        params = {version: 3, public_key: @public_key}.merge(options)
-        data = encode64 encode_json params
+      def cnb_form_fields options
+        params = {version: 3, public_key: @public_key}.merge options
+        data = encode params
         {
           data: data,
           signature: encode_signature(data)
         }
       end
 
-      def encode64(param)
-        Base64.strict_encode64(param).chomp
+      def encode data
+        encode64 encode_json data
       end
 
-      def encode_json(params)
-        JSON.generate(params)
+      def encode64 param
+        Base64.strict_encode64 param
       end
 
-      def encode_signature(param)
-        encode64 Digest::SHA1.digest(@private_key + param + @private_key)
+      def encode_json params
+        JSON.generate params
       end
 
-      def check_signature(data, signature)
+      def encode_signature param
+        encode64 Digest::SHA1.digest @private_key + param + @private_key
+      end
+
+      def check_signature data, signature
         signature == encode_signature(data)
       end
     end

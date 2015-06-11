@@ -1,4 +1,3 @@
-require "spree_liqpay/engine"
-
-module SpreeLiqpay
-end
+require 'spree_core'
+require 'spree_frontend'
+require 'spree_liqpay/engine'
