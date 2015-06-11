@@ -18,15 +18,15 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
-  s.add_runtime_dependency 'spree_core', '~> 3.0.0'
-  s.add_runtime_dependency 'spree_frontend', '~> 3.0.0'
+  s.add_runtime_dependency 'spree_core', '~> 3.0'
+  s.add_runtime_dependency 'spree_frontend', '~> 3.0'
 
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'factory_girl_rails'
-  s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'selenium-webdriver'
-  s.add_development_dependency 'coffee-script'
+  s.add_development_dependency 'sqlite3', '~> 1.3'
+  s.add_development_dependency 'rspec-rails', '~> 3.2'
+  s.add_development_dependency 'capybara', '~> 2.4'
+  s.add_development_dependency 'factory_girl_rails', '~> 4.5'
+  s.add_development_dependency 'database_cleaner', '~> 1.4'
+  s.add_development_dependency 'ffaker', '~> 1.16'
+  s.add_development_dependency 'selenium-webdriver', '~> 2.45'
+  s.add_development_dependency 'coffee-script', '~> 2.4'
 end
